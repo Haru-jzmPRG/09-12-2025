@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import funciones.ArrayUtils;
-
 
 public class App {
     
@@ -159,13 +157,13 @@ public class App {
         // - Usar ArrayUtils.buscarPosicionNota() para encontrar la posición
         // - Mostrar el nombre del alumno con la nota máxima y mínima
         for (int i = 0; i < nombres.length; i++) {
-            if (i == funciones.ArrayUtils.buscarPosicionNota(notas, funciones.ArrayUtils.buscarMaximo(notas))) {
+            if (i == ArrayUtils.buscarPosicionNota(notas, ArrayUtils.buscarMaximo(notas))) {
                 System.out.printf("Nota máxima: %.2f (%s)%n", notas[i], nombres[i]);
             }
         }
         
         for (int i = 0; i < nombres.length; i++) {
-            if (i == funciones.ArrayUtils.buscarPosicionNota(notas, funciones.ArrayUtils.buscarMinimo(notas))) {
+            if (i == ArrayUtils.buscarPosicionNota(notas, ArrayUtils.buscarMinimo(notas))) {
                 System.out.printf("Nota máxima: %.2f (%s)%n", notas[i], nombres[i]);
             }
         }
@@ -179,8 +177,8 @@ public class App {
         // - Usar ArrayUtils.contarAprobados() para contar aprobados
         // - Calcular suspensos restando al total
         // - Calcular y mostrar el porcentaje de aprobados
-        int aprobados = funciones.ArrayUtils.contarAprobados(notas);
-        int suspensos = funciones.ArrayUtils.contarAprobados(notas) - NUM_ALUMNOS;
+        int aprobados = ArrayUtils.contarAprobados(notas);
+        int suspensos = ArrayUtils.contarAprobados(notas) - NUM_ALUMNOS;
         if (suspensos < 0) 
             suspensos = NUM_ALUMNOS-aprobados;
         double porcentaje = (double) suspensos / (double) NUM_ALUMNOS * 100;
@@ -201,7 +199,7 @@ public class App {
         // - Si devuelve -1, el alumno no existe
         // - Si existe, mostrar su nombre y nota
         String nombre = System.console().readLine("Introduce el nombre a buscar: ");
-        int posicion = funciones.ArrayUtils.buscarPosicionNombre(nombres, nombre);
+        int posicion = ArrayUtils.buscarPosicionNombre(nombres, nombre);
         if (posicion == -1) {
             System.out.printf("El almuno '%s' no existe en la clase%n", nombre);
             return;
