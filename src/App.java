@@ -1,5 +1,6 @@
 import java.util.Scanner;
-import funciones.ArrayUtils.*;
+
+import funciones.ArrayUtils;
 
 
 public class App {
@@ -118,7 +119,7 @@ public class App {
             System.out.printf("--- Alumno %d ---%n", i + 1);
             nombres[i] = System.console().readLine("Nombre: ");
             notas[i] = Double.parseDouble(System.console().readLine("Nota: "));
-            if (!funciones.ArrayUtils.validarNota(notas[i])) {
+            if (!ArrayUtils.validarNota(notas[i])) {
                 System.out.println("Error: Nota no válida");
                 datosIntroducidos = false;
                 return;
@@ -134,7 +135,7 @@ public class App {
 
         // TODO: Implementar
         // - Usar ArrayUtils.mostrarDatos() para mostrar nombres y notas
-        funciones.ArrayUtils.mostrarDatos(nombres, notas);
+        ArrayUtils.mostrarDatos(nombres, notas);
         
     }
 
@@ -145,7 +146,7 @@ public class App {
         // TODO: Implementar
         // - Usar ArrayUtils.calcularMedia() para obtener la media
         // - Mostrar el resultado con 2 decimales
-        double media = funciones.ArrayUtils.calcularMedia(notas);
+        double media = ArrayUtils.calcularMedia(notas);
         System.out.printf("La nota media de la clase es: %.2f%n", media);
     }
 
