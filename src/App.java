@@ -1,8 +1,7 @@
 import java.util.Scanner;
 
-
 public class App {
-    
+
     static Scanner sc = new Scanner(System.in);
     static final int NUM_ALUMNOS = 10;
     static String[] nombres = new String[NUM_ALUMNOS];
@@ -113,8 +112,8 @@ public class App {
         // - Al terminar, poner datosIntroducidos = true
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             System.out.printf("--- Alumno %d ---%n", i + 1);
-            nombres[i] = System.console().readLine("Nombre: ");
-            notas[i] = Double.parseDouble(System.console().readLine("Nota: "));
+            nombres[i] = leerString("Nombre: ");
+            notas[i] = leerEntero("Nota:");
             if (!ArrayUtils.validarNota(notas[i])) {
                 System.out.println("Error: Nota no válida");
                 datosIntroducidos = false;
@@ -132,7 +131,7 @@ public class App {
         // TODO: Implementar
         // - Usar ArrayUtils.mostrarDatos() para mostrar nombres y notas
         ArrayUtils.mostrarDatos(nombres, notas);
-        
+
     }
 
     public static void calcularMedia() {
@@ -161,7 +160,7 @@ public class App {
                 System.out.printf("Nota máxima: %.2f (%s)%n", notas[i], nombres[i]);
             }
         }
-        
+
         for (int i = 0; i < nombres.length; i++) {
             if (i == ArrayUtils.buscarPosicionNota(notas, ArrayUtils.buscarMinimo(notas))) {
                 System.out.printf("Nota máxima: %.2f (%s)%n", notas[i], nombres[i]);
@@ -179,9 +178,13 @@ public class App {
         // - Calcular y mostrar el porcentaje de aprobados
         int aprobados = ArrayUtils.contarAprobados(notas);
         int suspensos = ArrayUtils.contarAprobados(notas) - NUM_ALUMNOS;
-        if (suspensos < 0) 
-            suspensos = NUM_ALUMNOS-aprobados;
-        double porcentaje = (double) suspensos / (double) NUM_ALUMNOS * 100;
+        double porcentaje = 0;
+        if (suspensos < 0) {
+            suspensos = NUM_ALUMNOS - aprobados;
+            porcentaje = (double) suspensos / (double) NUM_ALUMNOS * 100;
+        } else {
+            porcentaje = (double) suspensos / (double) NUM_ALUMNOS * 100;
+        }
         System.out.printf("Número de aprobados: %d%n", aprobados);
         System.out.printf("Número de suspensos: %d%n", suspensos);
         System.out.printf("Porcentaje de aprobados: %.2f%%%n", porcentaje);
@@ -217,7 +220,20 @@ public class App {
         // - Si no existe, mostrar error
         // - Si existe, pedir la nueva nota y validarla
         // - Mostrar: "Nota de [nombre] modificada: X.XX -> Y.YY"
-        
+        String nombre = System.console().readLine("Introduce el nombre del alumno: ");
+        int newNota = Integer.parseInt(System.console().readLine("Introduce la nueva nota: "));
+        if (!ArrayUtils.validarNota(newNota)) {
+            System.out.println("Error: Nota no válida");
+            return;
+        }
+        int posicion = ArrayUtils.buscarPosicionNombre(nombres, nombre);
+        if (posicion == -1) {
+            System.out.printf("El alumno '%s' no existe en la clase%n", nombre);
+            return;
+        }
+        double aux = notas[posicion];
+        notas[posicion] = newNota;
+        System.out.printf("Nota de %s modificada: %.2f -> %.2f%n", nombres[posicion], aux, notas[posicion]);
 
     }
 
@@ -229,5 +245,7 @@ public class App {
         // - Usar ArrayUtils.ordenarBurbuja() para ordenar ambos arrays
         // - IMPORTANTE: Al intercambiar notas, también intercambiar nombres
         // - Mostrar los datos ordenados
+        ArrayUtils.ordenarBurbuja(nombres, notas);
+        mostrarDatos();
     }
 }
