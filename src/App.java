@@ -113,9 +113,10 @@ public class App {
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             System.out.printf("--- Alumno %d ---%n", i + 1);
             nombres[i] = leerString("Nombre: ");
-            notas[i] = leerEntero("Nota:");
-            if (!ArrayUtils.validarNota(notas[i])) {
-                System.out.println("Error: Nota no válida");
+            notas[i] = leerDouble("Nota: ");
+            
+            if (!ArrayUtils.validarNota(notas[i])){
+                System.out.println("Error: Nota no válida, vuelve a introducir");
                 datosIntroducidos = false;
                 return;
             }
@@ -177,9 +178,9 @@ public class App {
         // - Calcular suspensos restando al total
         // - Calcular y mostrar el porcentaje de aprobados
         int aprobados = ArrayUtils.contarAprobados(notas);
-        int suspensos = ArrayUtils.contarAprobados(notas) - NUM_ALUMNOS;
+        int suspensos = NUM_ALUMNOS - aprobados;
         double porcentaje = 0;
-        if (suspensos < 0) {
+        if (suspensos <= 0) {
             suspensos = NUM_ALUMNOS - aprobados;
             porcentaje = (double) suspensos / (double) NUM_ALUMNOS * 100;
         } else {
