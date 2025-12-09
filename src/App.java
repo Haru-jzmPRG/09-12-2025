@@ -179,6 +179,14 @@ public class App {
         // - Usar ArrayUtils.contarAprobados() para contar aprobados
         // - Calcular suspensos restando al total
         // - Calcular y mostrar el porcentaje de aprobados
+        int aprobados = funciones.ArrayUtils.contarAprobados(notas);
+        int suspensos = funciones.ArrayUtils.contarAprobados(notas) - NUM_ALUMNOS;
+        if (suspensos < 0) 
+            suspensos = NUM_ALUMNOS-aprobados;
+        double porcentaje = (double) suspensos / (double) NUM_ALUMNOS * 100;
+        System.out.printf("Número de aprobados: %d%n", aprobados);
+        System.out.printf("Número de suspensos: %d%n", suspensos);
+        System.out.printf("Porcentaje de aprobados: %.2f%%%n", porcentaje);
     }
 
     // ==================== NIVEL AVANZADO ====================
@@ -192,6 +200,13 @@ public class App {
         // - Usar ArrayUtils.buscarPosicionNombre() para buscar
         // - Si devuelve -1, el alumno no existe
         // - Si existe, mostrar su nombre y nota
+        String nombre = System.console().readLine("Introduce el nombre a buscar: ");
+        int posicion = funciones.ArrayUtils.buscarPosicionNombre(nombres, nombre);
+        if (posicion == -1) {
+            System.out.printf("El almuno '%s' no existe en la clase%n", nombre);
+            return;
+        }
+        System.out.printf("Alumno encontrado: %s con noa %.2f%n", nombres[posicion], notas[posicion]);
     }
 
     public static void modificarNota() {
@@ -204,6 +219,8 @@ public class App {
         // - Si no existe, mostrar error
         // - Si existe, pedir la nueva nota y validarla
         // - Mostrar: "Nota de [nombre] modificada: X.XX -> Y.YY"
+        
+
     }
 
     public static void ordenarPorNota() {

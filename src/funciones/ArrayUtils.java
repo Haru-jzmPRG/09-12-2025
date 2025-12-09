@@ -101,6 +101,11 @@ public class ArrayUtils {
         // - Usar equalsIgnoreCase() para comparar
         // - Si lo encuentra, devolver la posición (índice)
         // - Si no lo encuentra, devolver -1
+        for (int i = 0; i < nombres.length; i++) {
+            if (nombres[i].equalsIgnoreCase(nombre.toLowerCase())) {
+                return i;
+            }
+        }
         return -1;
     }
 
@@ -109,5 +114,17 @@ public class ArrayUtils {
         // - Ordenar por nota de menor a mayor usando burbuja
         // - IMPORTANTE: Al intercambiar notas, también intercambiar nombres
         // - Así se mantiene la correspondencia entre arrays
+        for (int i = 0; i < notas.length; i++) {
+            for (int j = i + 1; j < notas.length; j++) {
+                if (notas[i] > notas[j]) {
+                    double aux = notas[i];
+                    notas[i] = notas[j];
+                    notas[j] = aux;
+                    String aux2 = nombres[i];
+                    nombres[i] = nombres[j];
+                    nombres[j] = aux2;
+                }
+            }
+        }
     }
 }
