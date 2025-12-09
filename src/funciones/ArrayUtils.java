@@ -31,7 +31,7 @@ public class ArrayUtils {
         // - Sumar todas las notas
         // - Dividir entre el número de elementos
         // - Devolver la media
-        int suma = 0;
+        double suma = 0;
         for (int i = 0; i < notas.length; i++) {
             suma += notas[i];
         }

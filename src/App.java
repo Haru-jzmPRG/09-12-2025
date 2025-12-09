@@ -113,8 +113,6 @@ public class App {
         // - Recorrer los arrays y pedir nombre y nota de cada alumno
         // - Validar que la nota esté entre 0 y 10 usando ArrayUtils.validarNota()
         // - Al terminar, poner datosIntroducidos = true
-        String[] nombres = new String[NUM_ALUMNOS];
-        double[] notas = new double[NUM_ALUMNOS];
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             System.out.printf("--- Alumno %d ---%n", i + 1);
             nombres[i] = System.console().readLine("Nombre: ");
@@ -160,6 +158,17 @@ public class App {
         // - Usar ArrayUtils.buscarMaximo() y ArrayUtils.buscarMinimo()
         // - Usar ArrayUtils.buscarPosicionNota() para encontrar la posición
         // - Mostrar el nombre del alumno con la nota máxima y mínima
+        for (int i = 0; i < nombres.length; i++) {
+            if (i == funciones.ArrayUtils.buscarPosicionNota(notas, funciones.ArrayUtils.buscarMaximo(notas))) {
+                System.out.printf("Nota máxima: %.2f (%s)%n", notas[i], nombres[i]);
+            }
+        }
+        
+        for (int i = 0; i < nombres.length; i++) {
+            if (i == funciones.ArrayUtils.buscarPosicionNota(notas, funciones.ArrayUtils.buscarMinimo(notas))) {
+                System.out.printf("Nota máxima: %.2f (%s)%n", notas[i], nombres[i]);
+            }
+        }
     }
 
     public static void contarAprobadosSuspensos() {
